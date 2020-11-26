@@ -1,0 +1,62 @@
+<p>class-manager works!</p>
+
+
+<p *ngIf="!classes"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="classes && !editingClass">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let class of classes">
+            <td><button class="btn btn-primary" (click)="editClass(class)">Edit</button></td>
+            <td>{{ class.name }}</td>
+        </tr>
+        <tr>
+            <td><button class="btn btn-primary" (click)="newClass()">New</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="editingClass">
+    <p>
+        <button class="btn btn-primary" (click)="saveClass()">Save</button>
+        <button class="btn btn-primary" (click)="cancelEditClass()">Cancel</button>
+    </p>
+
+    <label>
+        Class Name :
+        <input type="text" [(ngModel)]="editingClass.name" >
+    </label>
+
+    <table class='table table-striped' aria-labelledby="tableLabel">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>No</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of editingClass.students">
+                <td>
+                    <button class="btn btn-primary" (click)="deleteStudent(student)">delete</button>
+                </td>
+                <td><input type="text" [(ngModel)]="student.name" ></td>
+                <td><input type="text" [(ngModel)]="student.no" ></td>
+                <td>
+                    <input type="text" [(ngModel)]="student.gender" >
+                </td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-primary" (click)="newStudent()">New</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
